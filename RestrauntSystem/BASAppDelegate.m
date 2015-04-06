@@ -21,6 +21,7 @@
 @property (nonatomic,strong)  AVAudioPlayer* playerNotice;
 @property(nonatomic,assign)   int vibrateCount;
 @property (nonatomic, retain) NSTimer * vibrateTimer;
+
 @end
 
 @implementation BASAppDelegate
@@ -300,8 +301,9 @@
 {
    
     self.isBackground = NO;
-
+    
 }
+
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {

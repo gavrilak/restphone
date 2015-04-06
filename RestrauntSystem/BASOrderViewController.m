@@ -14,6 +14,7 @@
 #import "BASSubCategoryTableViewCell.h"
 
 @interface BASOrderViewController (){
+    BOOL isModify;
     NSUInteger dishIdx;
 }
 
@@ -68,7 +69,7 @@
  
     TheApp;
         
-
+    
     [self setupLblAmountWithBtnOrder:NO];
     [self.tableView removeFromSuperview];
     self.tableView = nil;
@@ -135,24 +136,29 @@
 
 - (void)buttonClicked:(id)sender{
     TheApp;
-    UIButton* button = (UIButton*)sender;
-    UIViewController* controller = nil;
-    
-    if(button == _btAdd){
-        BASMenuController* obj = [BASMenuController new];
-        obj.isOrder = YES;
-        app.isOrder = YES;
-        controller = obj;
-    } else if(button == _btOrder){
-        [self makeOrder];
-    } else if(button == _btCalc){
-        NSDictionary* order = (NSDictionary*)[_contentData objectForKey:@"order"];
-        BASCalculateViewController* obj = [BASCalculateViewController new];
-        obj.price = [NSString stringWithFormat:@"%d",app.curCoastOrder];
-        obj.id_order = (NSNumber*)[order objectForKey:@"id_order"];;
-        controller = obj;
+    if (!isModify){
+        UIButton* button = (UIButton*)sender;
+        UIViewController* controller = nil;
+  
+        if(button == _btAdd){
+            BASMenuController* obj = [BASMenuController new];
+            obj.isOrder = YES;
+            app.isOrder = YES;
+            controller = obj;
+        } else if(button == _btOrder){
+            [self makeOrder];
+        } else if(button == _btCalc){
+            NSDictionary* order = (NSDictionary*)[_contentData objectForKey:@"order"];
+            BASCalculateViewController* obj = [BASCalculateViewController new];
+            obj.price = [NSString stringWithFormat:@"%d",app.curCoastOrder];
+            obj.id_order = (NSNumber*)[order objectForKey:@"id_order"];;
+            controller = obj;
+        }
+        [self.navigationController pushViewController:controller animated:YES];
     }
-    [self.navigationController pushViewController:controller animated:YES];
+    else {
+        [[BASManager sharedInstance]showAlertViewWithMess:@"Подтвердите выбор модификаторов!"];
+    }
 }
 - (void)btnBackPressed
 {
@@ -211,18 +217,23 @@
 #pragma mark Table view methods
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     TheApp;
-    if(app.curOrderList != nil && app.curOrderList.count > 0 && app.addOrderList != nil && app.addOrderList.count > 0){
-        if([indexPath section] == 0)
-            return NO;
-        else
-            return YES;
-    } else{
-        if(app.curOrderList != nil && app.curOrderList.count > 0)
-            return NO;
-        else if(app.addOrderList != nil && app.addOrderList.count > 0)
-            return YES;
+    if (!isModify){
+        if(app.curOrderList != nil && app.curOrderList.count > 0 && app.addOrderList != nil && app.addOrderList.count > 0 ){
+            if([indexPath section] == 0)
+                return NO;
+            else
+                return YES;
+        } else{
+            if(app.curOrderList != nil && app.curOrderList.count > 0)
+                return NO;
+            else if(app.addOrderList != nil && app.addOrderList.count > 0)
+                return YES;
+            }
+        return YES;
     }
-    return YES;
+    else{
+        return NO;
+    }
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -367,6 +378,9 @@
     TheApp;
     if(app.addOrderList != nil && app.addOrderList.count > 0){
 
+        [_btAdd setEnabled:NO];
+        [_btCalc setEnabled:NO];
+        [_btOrder setEnabled:NO];
         dishIdx = _dishIdx;
         NSDictionary* dict = (NSDictionary*)[app.addOrderList objectAtIndex:dishIdx];
         NSNumber* count_dish = (NSNumber*)[dict objectForKey:@"count_dish"];
@@ -377,7 +391,7 @@
                 self.modifyView = [[BASModifyView alloc]initWithFrame:CGRectMake(self.view.frame.size.width / 2 - image.size.width / 2, self.view.frame.size.height / 2 - image.size.height / 2 - 60.f, image.size.width, image.size.height) withContent:mod withDelegate:(id)self];
                 _modifyView.title = (NSString*)[dict objectForKey:@"name_dish"];
                 [self.view addSubview:_modifyView];
-
+                isModify = YES;
                 [_tableView setScrollEnabled:NO];
             }
         }
@@ -388,9 +402,12 @@
 - (void)doneClicked:(BASModifyView*)view withContent:(NSArray*)content{
     TheApp;
     
+    [_btAdd setEnabled:YES];
+    [_btCalc setEnabled:YES];
+    [_btOrder setEnabled:YES];
     [_modifyView removeFromSuperview];
     self.modifyView = nil;
-    
+    isModify = NO;
     if(content != nil){
         NSMutableArray* temp = [[NSMutableArray alloc]initWithArray:app.addOrderList];
         NSDictionary* dict = (NSDictionary*)[app.addOrderList objectAtIndex:dishIdx];

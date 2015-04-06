@@ -93,7 +93,10 @@
     
     
     if(_orders != nil)
-        [self makeOrder];
+        if(!isModify)
+            [self makeOrder];
+        else
+           [[BASManager sharedInstance]showAlertViewWithMess:@"Подтвердите выбор модификаторов!"];
     else
         [[BASManager sharedInstance]showAlertViewWithMess:@"Выберите блюдо!"];
 }
@@ -207,7 +210,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     TheApp;
-    if(!app.isOrder){
+    if(!app.isOrder && !isModify){
         BASDishViewController* controller = [BASDishViewController new];
         controller.contentData = (NSDictionary*)[_dishesContent objectAtIndex:[indexPath row]];
     
@@ -220,13 +223,13 @@
 
 - (void)plusOneDish:(NSUInteger)_dishIdx success:(SuccessBlock)success{
     TheApp;
-    if(_isOrder){
+    if(_isOrder && !isModify){
 
         NSDictionary* obj = (NSDictionary*)[_dishesContent objectAtIndex:_dishIdx];
         
         NSNumber* availability = (NSNumber*)[obj objectForKey:@"availability"];
         
-        if([availability integerValue] == 1){
+        if([availability integerValue] != 0){
             
             NSNumber* price = (NSNumber*)[obj objectForKey:@"price"];
             NSNumber* id_dish = (NSNumber*)[obj objectForKey:@"id_dish"];
@@ -267,7 +270,7 @@
 }
 - (void)minusOneDish:(NSUInteger)_dishIdx success:(SuccessBlock)success{
     TheApp;
-    if(_isOrder){
+    if(_isOrder && !isModify){
         NSDictionary* dict = (NSDictionary*)[_dishesContent objectAtIndex:_dishIdx];
 
         NSNumber* price = (NSNumber*)[dict objectForKey:@"price"];
@@ -313,6 +316,7 @@
                 if(mod != nil && mod.count > 0 && !isModify){
                     self.modifyView = [[BASModifyView alloc]initWithFrame:CGRectMake(self.view.frame.size.width / 2 - image.size.width / 2, self.view.frame.size.height / 2 - image.size.height / 2 - 60.f, image.size.width, image.size.height) withContent:mod withDelegate:(id)self];
                     _modifyView.title = (NSString*)[dict objectForKey:@"name_dish"];
+                   
                     [self.view addSubview:_modifyView];
                     isModify = YES;
                     [_tableView setScrollEnabled:NO];

@@ -48,7 +48,7 @@
         self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(bgImg.frame.origin.x + 5.f, bgImg.frame.origin.y + 5.f, bgImg.frame.size.width - 10.f, bgImg.frame.size.height - 10.f)];
         [_imageView setBackgroundColor:[UIColor clearColor]];
 
-        NSString* link = [NSString stringWithFormat:@"%@%@",HTTP,(NSString*)[contentData objectForKey:@"descr_link"]];
+        NSString* link = [contentData objectForKey:@"descr_link"];
         [_imageView setImageWithURL:[NSURL URLWithString:link] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
         [_scrollView addSubview:_imageView];
         [_scrollView addSubview:bgImg];
@@ -74,7 +74,7 @@
         [_scrollView addSubview:_timeView];
         
         UILabel* about = [[UILabel alloc] initWithFrame:CGRectMake(bgImg.frame.origin.x, bgImg.frame.origin.y + bgImg.frame.size.height + 80.f, frame.size.width - 2 * bgImg.frame.origin.x, 20.f)];
-        about.backgroundColor = [UIColor clearColor];
+        about.backgroundColor = [UIColor clearColor]; 
         about.font = [UIFont boldSystemFontOfSize:18.0];
         about.shadowColor = [Settings color:ColorForNavBarTitleShadow];
         about.shadowOffset = [Settings offset:OffsetForNavBarTitleShadow];
