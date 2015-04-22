@@ -14,7 +14,6 @@
 #import "BASSubCategoryTableViewCell.h"
 
 @interface BASOrderViewController (){
-    BOOL isModify;
     NSUInteger dishIdx;
 }
 
@@ -41,9 +40,13 @@
 
 - (void)viewDidLoad
 {
+    TheApp;
     [super viewDidLoad];
- 
     [self setupBackBtn];
+    if (app.addOrderList == nil) {
+        app.orders = [app loadPreOrderObjects];
+        app.addOrderList = [NSArray arrayWithArray:app.orders];
+    }
     
 }
 
@@ -136,7 +139,7 @@
 
 - (void)buttonClicked:(id)sender{
     TheApp;
-    if (!isModify){
+    if (!app.isModify){
         UIButton* button = (UIButton*)sender;
         UIViewController* controller = nil;
   
@@ -147,6 +150,7 @@
             controller = obj;
         } else if(button == _btOrder){
             [self makeOrder];
+            return;
         } else if(button == _btCalc){
             NSDictionary* order = (NSDictionary*)[_contentData objectForKey:@"order"];
             BASCalculateViewController* obj = [BASCalculateViewController new];
@@ -162,12 +166,24 @@
 }
 - (void)btnBackPressed
 {
+    TheApp;
+    if (app.addOrderList != nil && [app.addOrderList count]>0) {
+        NSDictionary *dict =[ NSDictionary dictionaryWithObjectsAndKeys:
+            [NSNumber numberWithInteger:app.id_table],@"id_table",
+            [NSNumber numberWithInteger:app.id_order],@"id_order",
+            app.addOrderList ,@"order_items",
+            nil];
+        [app.preOrderObjects addObject:dict];
+    } else {
+        [app deletePreOrderObjects];
+    }
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 - (void)makeOrder{
     TheApp;
     BASManager* manager = [BASManager sharedInstance];
     NSNumber* id_employee = (NSNumber*)[app.employeeInfo objectForKey:@"id_employee"];
+    
     
     NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           id_employee,@"id_employee",
@@ -217,7 +233,7 @@
 #pragma mark Table view methods
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     TheApp;
-    if (!isModify){
+    if (!app.isModify){
         if(app.curOrderList != nil && app.curOrderList.count > 0 && app.addOrderList != nil && app.addOrderList.count > 0 ){
             if([indexPath section] == 0)
                 return NO;
@@ -391,7 +407,7 @@
                 self.modifyView = [[BASModifyView alloc]initWithFrame:CGRectMake(self.view.frame.size.width / 2 - image.size.width / 2, self.view.frame.size.height / 2 - image.size.height / 2 - 60.f, image.size.width, image.size.height) withContent:mod withDelegate:(id)self];
                 _modifyView.title = (NSString*)[dict objectForKey:@"name_dish"];
                 [self.view addSubview:_modifyView];
-                isModify = YES;
+                app.isModify = YES;
                 [_tableView setScrollEnabled:NO];
             }
         }
@@ -407,7 +423,7 @@
     [_btOrder setEnabled:YES];
     [_modifyView removeFromSuperview];
     self.modifyView = nil;
-    isModify = NO;
+    app.isModify = NO;
     if(content != nil){
         NSMutableArray* temp = [[NSMutableArray alloc]initWithArray:app.addOrderList];
         NSDictionary* dict = (NSDictionary*)[app.addOrderList objectAtIndex:dishIdx];

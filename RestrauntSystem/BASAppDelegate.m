@@ -40,6 +40,7 @@
     self.isShowMessage = NO;
     self.curOrderList = nil;
     self.addOrderList = nil;
+    self.preOrderObjects = [[NSMutableArray alloc] init];
     
     UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     
@@ -78,10 +79,37 @@
     return  [NSArray arrayWithArray:data];
 }
 
+- (BOOL)isPreOrderTable {
+    for (NSDictionary* dict in self.preOrderObjects) {
+        if([[dict objectForKey:@"id_table"]integerValue] == self.id_table && [[dict objectForKey:@"id_order"]integerValue] == -1 ){
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (NSArray*) loadPreOrderObjects{
+    for (NSDictionary* dict in self.preOrderObjects) {
+        if([[dict objectForKey:@"id_table"]integerValue] == self.id_table &&( [[dict objectForKey:@"id_order"]integerValue] == self.id_order ||self.id_order == -1  || self.id_order == 0)){
+            return [dict objectForKey:@"order_items"];
+        }
+    }
+    return nil;
+}
+
+- (void) deletePreOrderObjects{
+    for (NSDictionary* dict in self.preOrderObjects) {
+        if([[dict objectForKey:@"id_table"]integerValue] == self.id_table){
+            [self.preOrderObjects removeObject:dict];
+        }
+    }
+}
+
 - (void)startbackgroundTask{
     [self playBlankMp3];
     [self performSelectorInBackground:@selector(backgroundTask) withObject:nil];
 }
+
 - (void)setNoticeCnt:(NSUInteger)noticeCnt
 {
     _noticeCnt = noticeCnt;

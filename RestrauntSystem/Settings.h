@@ -13,7 +13,7 @@
 
 //#define HTTP @"http://192.168.1.101:8080/"
 //#define HTTP @"http://25.133.91.220:8080"
-#define HTTP @"http://192.168.1.123:8080"
+#define HTTP @"http://192.168.1.101:8080"
 
 #define kMenuCatsCellReuseId        @"MenuCatsCell"
 #define kMenuCatCellReuseId         @"MenuCatCell"
@@ -888,7 +888,7 @@ typedef NS_ENUM(NSUInteger, TableState)
 {
     TableStateFree,
     TableStatePreorder,
-    TableStateBusy,
+    TableStateBusy
 };
 
 

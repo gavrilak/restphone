@@ -114,7 +114,7 @@
     app.titleInfo = @{@"room":(NSString*)[roomContent objectForKey:@"name_room"],
                       @"table":[NSNumber numberWithInteger:indexTable +1]
                       };
-    if(table_status == TableStateFree){
+    if(table_status == TableStateFree&&![app isPreOrderTable]){
         BASMenuController* obj = [BASMenuController new];
         obj.isOrder = YES;
         app.isOrder = YES;

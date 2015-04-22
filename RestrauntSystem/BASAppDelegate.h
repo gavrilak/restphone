@@ -34,6 +34,7 @@
 @property (nonatomic, assign) BOOL isNotice;
 @property (nonatomic, assign) BOOL isBackground;
 @property (nonatomic, assign) BOOL isOrder;
+@property (nonatomic, assign) BOOL isModify;
 @property (nonatomic, assign) BOOL isWaiter;
 @property (nonatomic, assign) BOOL isShowMessage;
 @property (nonatomic, strong) NSDictionary* employeeInfo;
@@ -44,12 +45,15 @@
 @property (nonatomic, assign) NSUInteger id_order;
 @property (nonatomic, strong) NSDictionary* titleInfo;
 @property (nonatomic, strong) NSString* noticeMessage;
-@property (nonatomic,assign)  SwitchType switchType;
+@property (nonatomic, assign) SwitchType switchType;
 @property (nonatomic, strong) NSArray* curOrderList;
 @property (nonatomic, strong) NSArray* addOrderList;
-
+@property (nonatomic, strong) NSMutableArray* preOrderObjects;
 
 - (NSArray*)sortContent:(NSArray*)source withType:(SwitchType)type;
+- (void)deletePreOrderObjects;
+- (NSArray*)loadPreOrderObjects;
+- (BOOL)isPreOrderTable;
 - (void)startbackgroundTask;
 - (BOOL) is4InchScreen;
 - (void)setNoticeCnt:(NSUInteger)noticeCnt;

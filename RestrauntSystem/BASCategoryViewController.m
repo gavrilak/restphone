@@ -13,7 +13,6 @@
 #import "BASModifyView.h"
 
 @interface BASCategoryViewController (){
-    BOOL isModify;
     NSUInteger dishIdx;
     NSUInteger curdishIdx;
     
@@ -45,9 +44,10 @@
 
 - (void)viewDidLoad
 {
+    TheApp;
     [super viewDidLoad];
     
-    isModify = NO;
+    app.isModify = NO;
     curdishIdx = -1;
     [self setupBackBtn];
 
@@ -93,7 +93,7 @@
     
     
     if(_orders != nil)
-        if(!isModify)
+        if(!app.isModify)
             [self makeOrder];
         else
            [[BASManager sharedInstance]showAlertViewWithMess:@"Подтвердите выбор модификаторов!"];
@@ -210,7 +210,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     TheApp;
-    if(!app.isOrder && !isModify){
+    if(!app.isOrder && !app.isModify){
         BASDishViewController* controller = [BASDishViewController new];
         controller.contentData = (NSDictionary*)[_dishesContent objectAtIndex:[indexPath row]];
     
@@ -223,7 +223,7 @@
 
 - (void)plusOneDish:(NSUInteger)_dishIdx success:(SuccessBlock)success{
     TheApp;
-    if(_isOrder && !isModify){
+    if(_isOrder && !app.isModify){
 
         NSDictionary* obj = (NSDictionary*)[_dishesContent objectAtIndex:_dishIdx];
         
@@ -270,7 +270,7 @@
 }
 - (void)minusOneDish:(NSUInteger)_dishIdx success:(SuccessBlock)success{
     TheApp;
-    if(_isOrder && !isModify){
+    if(_isOrder && !app.isModify){
         NSDictionary* dict = (NSDictionary*)[_dishesContent objectAtIndex:_dishIdx];
 
         NSNumber* price = (NSNumber*)[dict objectForKey:@"price"];
@@ -301,7 +301,7 @@
 }
 #pragma mark - BASModifyView  methods
 - (void)modificationDish:(NSUInteger)_dishIdx{
-
+    TheApp;
     dishIdx = _dishIdx;
 
     if(_orders != nil && _orders.count > 0){
@@ -313,12 +313,12 @@
                 UIImage* image = [UIImage imageNamed:@"cell_modifiers_x3.png"];
                 dict = (NSDictionary*)[_dishesContent objectAtIndex:dishIdx];
                 NSArray* mod = (NSArray*)[dict objectForKey:@"mod"];
-                if(mod != nil && mod.count > 0 && !isModify){
+                if(mod != nil && mod.count > 0 && !app.isModify){
                     self.modifyView = [[BASModifyView alloc]initWithFrame:CGRectMake(self.view.frame.size.width / 2 - image.size.width / 2, self.view.frame.size.height / 2 - image.size.height / 2 - 60.f, image.size.width, image.size.height) withContent:mod withDelegate:(id)self];
                     _modifyView.title = (NSString*)[dict objectForKey:@"name_dish"];
                    
                     [self.view addSubview:_modifyView];
-                    isModify = YES;
+                    app.isModify = YES;
                     [_tableView setScrollEnabled:NO];
                 }
             }
@@ -327,7 +327,7 @@
 }
 #pragma mark - BASModifyView delegate methods
 - (void)doneClicked:(BASModifyView*)view withContent:(NSArray*)content{
-    
+    TheApp;
 
     [_modifyView removeFromSuperview];
     self.modifyView = nil;
@@ -341,7 +341,7 @@
 
     }
     
-     isModify = NO;
+    app.isModify = NO;
     [_tableView setScrollEnabled:YES];
 }
 

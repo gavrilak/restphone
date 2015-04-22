@@ -221,21 +221,24 @@
   
 }
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
-    NSUInteger index = [tabBarController.viewControllers indexOfObject:viewController];
-
     TheApp;
-    app.isOrder = YES;
-    if(index == 1){
-        app.isOrder = NO;
-        /*for (UINavigationController* obj in tabBarController.viewControllers) {
-            UIViewController* controller = [[obj viewControllers]objectAtIndex:0];
-            if([controller isKindOfClass:[BASMenuController class]]){
-                ((BASMenuController*)controller).isOrder = NO;
-            }
-        }*/
+    if ( app.isModify == YES) {
+        return NO;
+    } else {
+        NSUInteger index = [tabBarController.viewControllers indexOfObject:viewController];
+        app.isOrder = YES;
+        if(index == 1){
+            app.isOrder = NO;
+            /*for (UINavigationController* obj in tabBarController.viewControllers) {
+             UIViewController* controller = [[obj viewControllers]objectAtIndex:0];
+             if([controller isKindOfClass:[BASMenuController class]]){
+                    ((BASMenuController*)controller).isOrder = NO;
+             }
+             }*/
         
-    }
+        }
     return YES;
+    }
 }
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
 
