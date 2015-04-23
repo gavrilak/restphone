@@ -31,11 +31,12 @@
 #define HALLS3 @"Второй этаж"
 
 
-#define DESSERTS @"Desserts"
-#define SALADS @"Salads"
-#define SOUPS @"Soups"
-#define ALCOHOL @"Alcohol"
-#define DRINKS @"Drinks"
+#define BREAKFASTS @"Завтраки"
+#define DESSERTS @"Закуски"
+#define SALADS @"Салаты"
+#define SOUPS @"Супы"
+#define ALCOHOL @"Алкоголь"
+#define DRINKS @"Напитки"
 
 
 #pragma mark - Enums
@@ -295,6 +296,7 @@ typedef enum {
         // Menu
     TextForApiFuncMenuItemFormat,
     TextForApiFuncMenuCats,
+    TextForApiFuncMenuForDishes,
     TextForApiFuncMenuDishesFormat,
     TextForApiFuncMenuDishesWithOrderFormat,
     TextForApiFuncGetDishFormat,
@@ -319,6 +321,8 @@ typedef enum {
     TextForAPIBaseURL,
     // Keys
     TextForApiKeyResult,
+    TextForApiKeyCountCategory,
+    TextForApiKeyCellColor,
     TextForApiKeyId,
     TextForApiKeyIdTable,
         // Halls

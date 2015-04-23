@@ -15,6 +15,7 @@
 @interface BASMenuController ()
 
 @property (nonatomic,strong) NSArray* contentData;
+@property (nonatomic,strong) NSDictionary* rootMenuDict;
 @property (nonatomic,strong) BASCustomTableView* tableView;
 
 @end
@@ -42,8 +43,14 @@
     if(app.isOrder)
         [self setupBackBtn];
     [self setupStopListBtn];
-    [self customTitle:[Settings text:TextForTabBarItemMenu]];
-    [self getData];
+
+    if (self.rootMenuDict != nil) {
+        [self getDataSubMenu];
+        [self customTitle:[self.rootMenuDict objectForKey:[Settings text:TextForApiKeyTitle]]];
+    } else {
+        [self getDataRootMenu];
+        [self customTitle:[Settings text:TextForTabBarItemMenu]];
+    }
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [self customTitle:@""];
@@ -63,7 +70,54 @@
         [self.view addSubview:_tableView];
     
 }
-- (void)getData{
+- (void)getDataSubMenu{
+    BASManager* manager = [BASManager sharedInstance];
+    NSDictionary* dictParam = @{@"id_category":[self.rootMenuDict objectForKey:[Settings text:TextForApiKeyId]]};
+    [manager getData:[manager formatRequest:[Settings text:TextForApiFuncMenuItemFormat] withParam:dictParam] success:^(id responseObject) {
+    
+        
+        if([responseObject isKindOfClass:[NSDictionary class]]){
+            
+            NSArray* param = (NSArray*)[responseObject objectForKey:@"param"];
+            NSLog(@"Response: %@",param);
+            if(param != nil){
+                
+                NSLog(@"%d",param.count);
+                NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:param.count];
+                
+                for (NSDictionary* obj in param) {
+                    
+                    NSString* catName = (NSString*)[obj objectForKey:@"name_category"];
+                    
+                    NSDictionary* dict = @{
+                                           [Settings text:TextForApiKeyCountCategory]:(NSNumber*) (NSNumber*)[obj objectForKey:@"category_count"],
+                                           [Settings text:TextForApiKeyId]: (NSNumber*)[obj objectForKey:@"id_category"],
+                                           [Settings text:TextForApiKeyTableState]: (NSNumber*)[obj objectForKey:@"load"],
+                                           [Settings text:TextForApiKeyCellColor]: (NSString*)[obj objectForKey:@"color"],
+                                           [Settings text:TextForApiKeyImage]: [self.rootMenuDict objectForKey:[Settings text:TextForApiKeyImage]],
+                                           [Settings text:TextForApiKeyTitle]: catName ,
+                                           @"modificators":(NSArray*)[obj objectForKey:@"modificators"],
+                                           };
+                   
+                    [data addObject:dict];
+                    
+                }
+                self.contentData = [NSArray arrayWithArray:data];
+                
+                [self prepareView];
+            }
+            
+        }
+        
+        
+    } failure:^(NSString *error) {
+        [manager showAlertViewWithMess:ERROR_MESSAGE];
+    }];
+
+    
+}
+
+- (void)getDataRootMenu{
     
  
     BASManager* manager = [BASManager sharedInstance];
@@ -76,7 +130,7 @@
              NSLog(@"Response: %@",param);
             if(param != nil){
                 
-                
+                NSLog(@"%d",param.count);
                 NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:param.count];
                 
                 for (NSDictionary* obj in param) {
@@ -84,8 +138,10 @@
                     NSString* catName = (NSString*)[obj objectForKey:@"name_category"];
    
                     NSDictionary* dict = @{
+                                           [Settings text:TextForApiKeyCountCategory]:(NSNumber*) (NSNumber*)[obj objectForKey:@"category_count"],
                                            [Settings text:TextForApiKeyId]: (NSNumber*)[obj objectForKey:@"id_category"],
                                            [Settings text:TextForApiKeyTableState]: (NSNumber*)[obj objectForKey:@"load"],
+                                           [Settings text:TextForApiKeyCellColor]: (NSString*)[obj objectForKey:@"color"],
                                            [Settings text:TextForApiKeyImage]: [Settings menuCatImgForId:catName],
                                            [Settings text:TextForApiKeyTitle]: [Settings menuCatTitleForId:catName],
                                            @"modificators":(NSArray*)[obj objectForKey:@"modificators"],
@@ -112,14 +168,20 @@
     return [_tableView hightCell:_tableView.typeTable];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-   
-    BASCategoryViewController* controller = [[BASCategoryViewController alloc]init];
-    controller.contentData = (NSDictionary*)[_contentData objectAtIndex:[indexPath row]];
-    controller.isOrder = _isOrder;
-    
-   
-    [self.navigationController pushViewController:controller animated:YES];
-    
+    TheApp;
+    NSDictionary* dict = (NSDictionary*)[_contentData objectAtIndex:[indexPath row]];
+    if( [[dict objectForKey:[Settings text:TextForApiKeyCountCategory]] integerValue] > 1) {
+        BASMenuController* controller = [[BASMenuController alloc]init];
+        controller.rootMenuDict = (NSDictionary*)[_contentData objectAtIndex:[indexPath row]];
+        app.isOrder = YES;
+        controller.isOrder = _isOrder;
+        [self.navigationController pushViewController:controller animated:YES];
+    } else {
+        BASCategoryViewController* controller = [[BASCategoryViewController alloc]init];
+        controller.contentData = (NSDictionary*)[_contentData objectAtIndex:[indexPath row]];
+        controller.isOrder = _isOrder;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 #pragma mark - Action methods
 - (void)btnStopListPressed{

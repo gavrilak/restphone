@@ -177,6 +177,7 @@
                                 // Menu
                             @"GETMENU", // TextForApiFuncMenuItemFormat
                             @"GETSUBMENU", // TextForApiFuncMenuCats
+                            @"GETDISHES", // TextForApiFuncMenuForDishes
                             @"GETDISH", // TextForApiFuncMenuDishesFormat
                             @"GetMenuListWithOrderedItems/%d/%d", // TextForApiFuncMenuDishesWithOrderFormat
                             @"GetMenuItem/%d", // TextForApiFuncGetDishFormat
@@ -202,6 +203,8 @@
                             HTTP, // TextForAPIBaseURL
                             // Keys
                             @"result", // TextForApiKeyResult
+                            @"CountCategory", // TextForApiKeyCountCategory
+                            @"CellColor", // TextForApiKeyCellColor
                             @"ID", // TextForApiKeyId
                             @"id_table", // TextForApiKeyIdTable
                                 // Halls
@@ -1123,6 +1126,8 @@
         imgName = @"cell_alco";
     else if([catName isEqualToString:DRINKS])
         imgName = @"cell_cofe";
+    else if([catName isEqualToString:BREAKFASTS])
+        imgName = @"cell_breakfast";
     else
         return nil;
 
@@ -1142,6 +1147,8 @@
         imgName = @"Алкоголь";
     else if([catName isEqualToString:DRINKS])
         imgName = @"Напитки";
+    else if([catName isEqualToString:BREAKFASTS])
+        imgName = @"Завтраки";
     else
         return nil;
     

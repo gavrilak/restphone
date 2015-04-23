@@ -140,14 +140,14 @@
                         NSNumber* max_dish = (NSNumber*)[obj objectForKey:@"max_dish"];
                         if(max_dish != nil){
                          dict = @{
-                                           @"id_dish": (NSNumber*)[obj objectForKey:@"id_dish"],
-                                           @"name_dish": (NSNumber*)[obj objectForKey:@"name_dish"],
-                                           @"price": (NSNumber*)[obj objectForKey:@"price"],
-                                           @"weight": (NSNumber*)[obj objectForKey:@"weight"],
-                                           @"availability": (NSNumber*)[obj objectForKey:@"availability"],
-                                           @"max_dish": (NSNumber*)[obj objectForKey:@"max_dish"],
-                                           @"mod": (NSArray*)[obj objectForKey:@"mod"],
-                                           };
+                                    @"id_dish": (NSNumber*)[obj objectForKey:@"id_dish"],
+                                    @"name_dish": (NSNumber*)[obj objectForKey:@"name_dish"],
+                                    @"price": (NSNumber*)[obj objectForKey:@"price"],
+                                    @"weight": (NSNumber*)[obj objectForKey:@"weight"],
+                                    @"availability": (NSNumber*)[obj objectForKey:@"availability"],
+                                    @"max_dish": (NSNumber*)[obj objectForKey:@"max_dish"],
+                                    @"mod": (NSArray*)[obj objectForKey:@"mod"],
+                                };
                         } else {
                             dict = @{
                                      @"id_dish": (NSNumber*)[obj objectForKey:@"id_dish"],
