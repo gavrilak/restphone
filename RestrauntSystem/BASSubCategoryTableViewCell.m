@@ -106,6 +106,8 @@
     }
     
     self.lblTitle.text = [NSString stringWithFormat:[Settings text:TextForDishCellTitleFormat], title];
+    self.lblTitle.numberOfLines = 0;
+    [self.lblTitle  setLineBreakMode:NSLineBreakByWordWrapping];
 }
 
 - (void)setWeight:(NSString*)weight
@@ -358,9 +360,11 @@
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = frame;
+    
     [btn setTitle:title forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor greenColor] forState:UIControlStateHighlighted];
+
     //#warning test
     //    btn.backgroundColor = [UIColor lightGrayColor];
     [btn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];

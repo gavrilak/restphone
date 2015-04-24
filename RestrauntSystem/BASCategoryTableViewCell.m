@@ -12,6 +12,7 @@
 
 @property(nonatomic,strong)UIImageView* bgView;
 @property(nonatomic,strong)UIImageView* oclockView;
+@property(nonatomic,strong)UILabel* titleLabel;
 
 @end
 
@@ -26,9 +27,14 @@
         
         [self setBackgroundColor:[UIColor clearColor]];
         
-        self.bgView = [[UIImageView alloc]initWithImage:[_contentData objectForKey:[Settings text:TextForApiKeyImage]]];
-        [self.contentView addSubview:_bgView];
+       // self.bgView = [[UIImageView alloc]initWithImage:[_contentData objectForKey:[Settings text:TextForApiKeyImage]]];
+       // [self.contentView addSubview:_bgView];
 
+        self.titleLabel = [[UIImageView alloc]initWithImage:[_contentData objectForKey:[Settings text:TextForApiKeyImage]]];
+        [self.contentView addSubview:_titleLabel];
+        
+       
+        
         self.oclockView = [[UIImageView alloc]initWithImage:[self getIconLoadType:[_contentData objectForKey:[Settings text:TextForApiKeyTableState]]]];
         [self.contentView addSubview:_oclockView];
 
@@ -44,6 +50,8 @@
     
     UIImage* img = (UIImage*)[_contentData objectForKey:[Settings text:TextForApiKeyImage]];
     [_bgView setFrame:CGRectMake(5.f, frame.size.height - img.size.height, frame.size.width - 10.f, img.size.height)];
+    
+    
     
     img = (UIImage*)[Settings image:ImageForCatStateNormal];
     [_oclockView setFrame:CGRectMake(frame.size.width - img.size.width - 10.f, _bgView.frame.origin.y + 5.f, img.size.width, img.size.height)];

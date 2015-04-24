@@ -395,10 +395,10 @@
                               [NSValue valueWithCGRect:CGRectMake(40.f,
                                                                   35.f,
                                                                   200.f,
-                                                                  [Settings fontSize:FontForDishCellTitle] + [Settings correction:CorrectionForLblHeightFromFontSize])],
+                                                                  [Settings fontSize:FontForDishCellTitle]*2 + [Settings correction:CorrectionForLblHeightFromFontSize]*2)],
                               // RectForDishCellCost
                               [NSValue valueWithCGRect:CGRectMake(50.f,
-                                                                  75.5f,
+                                                                  80.5f,
                                                                   190.f,
                                                                   [Settings fontSize:FontForDishCellCost] + [Settings correction:CorrectionForLblHeightFromFontSize])],
                               // RectForDishCellWeight

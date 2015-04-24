@@ -115,12 +115,13 @@
     
     BASManager* manager = [BASManager sharedInstance];
  
+    NSLog(@"%d",[[_contentData objectForKey:[Settings text:TextForApiKeyId]]integerValue]);
     NSDictionary* dict = @{
                            @"id_category": (NSNumber*)[_contentData objectForKey:[Settings text:TextForApiKeyId]],
                            };
 
     
-    [manager getData:[manager formatRequest:[Settings text:TextForApiFuncMenuCats] withParam:dict] success:^(id responseObject) {
+    [manager getData:[manager formatRequest:[Settings text:TextForApiFuncMenuForDishes] withParam:dict] success:^(id responseObject) {
 
         if([responseObject isKindOfClass:[NSDictionary class]]){
             
@@ -143,7 +144,13 @@
                                     @"id_dish": (NSNumber*)[obj objectForKey:@"id_dish"],
                                     @"name_dish": (NSNumber*)[obj objectForKey:@"name_dish"],
                                     @"price": (NSNumber*)[obj objectForKey:@"price"],
+                                    @"unit_price":(NSString*) [obj objectForKey:@"unit_price"],
                                     @"weight": (NSNumber*)[obj objectForKey:@"weight"],
+                                    @"unit_weight":(NSString*) [obj objectForKey:@"unit_weight"],
+                                    @"description": (NSString*) [obj objectForKey:@"description"],
+                                    @"descr_link": (NSString*) [obj objectForKey:@"descr_link"],
+                                    @"time_prepare":  (NSString*) [obj objectForKey:@"time_prepare"],
+                                    @"unit_time": (NSString*) [obj objectForKey:@"unit_time"],
                                     @"availability": (NSNumber*)[obj objectForKey:@"availability"],
                                     @"max_dish": (NSNumber*)[obj objectForKey:@"max_dish"],
                                     @"mod": (NSArray*)[obj objectForKey:@"mod"],
@@ -153,7 +160,13 @@
                                      @"id_dish": (NSNumber*)[obj objectForKey:@"id_dish"],
                                      @"name_dish": (NSNumber*)[obj objectForKey:@"name_dish"],
                                      @"price": (NSNumber*)[obj objectForKey:@"price"],
+                                     @"unit_price":(NSString*) [obj objectForKey:@"unit_price"],
                                      @"weight": (NSNumber*)[obj objectForKey:@"weight"],
+                                     @"unit_weight":(NSString*) [obj objectForKey:@"unit_weight"],
+                                     @"description": (NSString*) [obj objectForKey:@"description"],
+                                     @"descr_link": (NSString*) [obj objectForKey:@"descr_link"],
+                                     @"time_prepare":  (NSString*) [obj objectForKey:@"time_prepare"],
+                                     @"unit_time": (NSString*) [obj objectForKey:@"unit_time"],
                                      @"availability": (NSNumber*)[obj objectForKey:@"availability"],
                                      @"count_dish": (NSNumber*)[obj objectForKey:@"count_dish"],
                                      @"mod": (NSArray*)[obj objectForKey:@"mod"],

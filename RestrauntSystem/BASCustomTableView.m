@@ -121,8 +121,8 @@
                 cell.delegate = _delegateDish;
                 cell.title = (NSString*)[obj objectForKey:@"name_dish"];
                 NSLog(@"name_dish: %@", cell.title);
-                cell.weight = (NSString*)[obj objectForKey:@"weight"];
-                cell.cost = (NSString*)[obj objectForKey:@"price"];
+                cell.weight = [NSString stringWithFormat:@"%@ %@", [obj objectForKey:@"weight"], [obj objectForKey:@"unit_weight"]] ;
+                cell.cost = [NSString stringWithFormat:@"%@ %@",[obj objectForKey:@"price"], [obj objectForKey:@"unit_price"]] ;
                 cell.dishIdx = index;
                 NSNumber* count_dish = (NSNumber*)[obj objectForKey:@"count_dish"];
                 cell.count = [count_dish integerValue];

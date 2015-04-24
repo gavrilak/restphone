@@ -11,6 +11,7 @@
 #import "BASCategoryViewController.h"
 #import "BASStopListController.h"
 #import "BASOrderViewController.h"
+#import "BASTablesController.h"
 
 @interface BASMenuController ()
 
@@ -177,6 +178,14 @@
         controller.isOrder = _isOrder;
         [self.navigationController pushViewController:controller animated:YES];
     } else {
+        app.isOrder = NO;
+        NSArray* controllers = self.navigationController.viewControllers;
+        for(UIViewController* obj in controllers){
+            if([obj isKindOfClass:[BASTablesController class]]){
+                app.isOrder = YES;
+                break;
+            }
+        }
         BASCategoryViewController* controller = [[BASCategoryViewController alloc]init];
         controller.contentData = (NSDictionary*)[_contentData objectAtIndex:[indexPath row]];
         controller.isOrder = _isOrder;

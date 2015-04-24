@@ -394,9 +394,7 @@
     TheApp;
     if(app.addOrderList != nil && app.addOrderList.count > 0){
 
-        [_btAdd setEnabled:NO];
-        [_btCalc setEnabled:NO];
-        [_btOrder setEnabled:NO];
+      
         dishIdx = _dishIdx;
         NSDictionary* dict = (NSDictionary*)[app.addOrderList objectAtIndex:dishIdx];
         NSNumber* count_dish = (NSNumber*)[dict objectForKey:@"count_dish"];
@@ -404,6 +402,9 @@
             UIImage* image = [UIImage imageNamed:@"cell_modifiers_x3.png"];
             NSArray* mod = (NSArray*)[dict objectForKey:@"mod"];
             if(mod != nil && mod.count > 0){
+                [_btAdd setEnabled:NO];
+                [_btCalc setEnabled:NO];
+                [_btOrder setEnabled:NO];
                 self.modifyView = [[BASModifyView alloc]initWithFrame:CGRectMake(self.view.frame.size.width / 2 - image.size.width / 2, self.view.frame.size.height / 2 - image.size.height / 2 - 60.f, image.size.width, image.size.height) withContent:mod withDelegate:(id)self];
                 _modifyView.title = (NSString*)[dict objectForKey:@"name_dish"];
                 [self.view addSubview:_modifyView];
