@@ -392,7 +392,7 @@
                                * Menu
                                */
                                // RectForDishCellTitle
-                              [NSValue valueWithCGRect:CGRectMake(40.f,
+                              [NSValue valueWithCGRect:CGRectMake(45.f,
                                                                   35.f,
                                                                   200.f,
                                                                   [Settings fontSize:FontForDishCellTitle]*2 + [Settings correction:CorrectionForLblHeightFromFontSize]*2)],

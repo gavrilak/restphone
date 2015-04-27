@@ -265,7 +265,9 @@
                                       [NSNumber numberWithInt:1],@"count_dish",
                                       (NSString*)[obj objectForKey:@"name_dish"],@"name_dish",
                                       (NSString*)[obj objectForKey:@"price"],@"price",
+                                      (NSString*)[obj objectForKey:@"unit_price"],@"unit_price",
                                       (NSString*)[obj objectForKey:@"weight"],@"weight",
+                                      (NSString*)[obj objectForKey:@"unit_weight"],@"unit_weight",
                                       (NSArray*)[_contentData objectForKey:@"modificators"],@"mod",
                                       nil];
 

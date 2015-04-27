@@ -168,6 +168,7 @@
 {
     TheApp;
     if (app.addOrderList != nil && [app.addOrderList count]>0) {
+        [app deletePreOrderObjects];
         NSDictionary *dict =[ NSDictionary dictionaryWithObjectsAndKeys:
             [NSNumber numberWithInteger:app.id_table],@"id_table",
             [NSNumber numberWithInteger:app.id_order],@"id_order",
@@ -349,19 +350,23 @@
     }
 
     cell.isDishCount = NO;
-    cell.title = (NSString*)[dict objectForKey:@"name_dish"];
-    cell.weight = (NSString*)[dict objectForKey:@"weight"];
-    cell.cost = (NSString*)[dict objectForKey:@"price"];
-    cell.dishIdx = [indexPath row];
     NSNumber* count_dish = (NSNumber*)[dict objectForKey:@"count_dish"];
     cell.count = [count_dish integerValue];
+      NSNumber* id_status = (NSNumber*)[dict objectForKey:@"status"];
+     cell.state = (OrderItemState)[id_status integerValue];
     if(count_dish == nil)
         cell.count = 0;
-    NSNumber* id_status = (NSNumber*)[dict objectForKey:@"status"];
-    cell.state = (OrderItemState)[id_status integerValue];
-
     
+    // "dish" appears after make order
     
+    if ([dict objectForKey:@"dish"] != nil) {
+        dict = [dict objectForKey:@"dish"];
+    }
+        
+    cell.title = (NSString*)[dict objectForKey:@"name_dish"];
+    cell.weight = [NSString stringWithFormat:@"%@ %@",[dict objectForKey:@"weight"], [dict objectForKey:@"unit_weight"] ];
+    cell.cost = [NSString stringWithFormat:@"%@ %@",[dict objectForKey:@"price"], [dict objectForKey:@"unit_price"] ];
+    cell.dishIdx = [indexPath row];
     NSNumber* max_dish = (NSNumber*)[dict objectForKey:@"max_dish"];
     if(max_dish != nil){
         cell.countDish = [max_dish integerValue];

@@ -55,7 +55,7 @@
             [_btnModificat setBackgroundColor:[UIColor clearColor]];
             [_btnModificat setBackgroundImage:[UIImage imageNamed:@"modification.png"] forState:UIControlStateNormal];
             [_btnModificat addTarget:self action:@selector(modificatClicked) forControlEvents:UIControlEventTouchUpInside];
-            [_btnModificat setFrame:CGRectMake(12.f, 30.f, 33.f, 28.5f)];
+            [_btnModificat setFrame:CGRectMake(12.f, 40.f, 33.f, 28.5f)];
             [self addSubview:_btnModificat];
         }
         

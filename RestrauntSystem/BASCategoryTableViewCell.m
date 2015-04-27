@@ -30,7 +30,10 @@
        // self.bgView = [[UIImageView alloc]initWithImage:[_contentData objectForKey:[Settings text:TextForApiKeyImage]]];
        // [self.contentView addSubview:_bgView];
 
-        self.titleLabel = [[UIImageView alloc]initWithImage:[_contentData objectForKey:[Settings text:TextForApiKeyImage]]];
+        self.titleLabel = [[UILabel alloc] init];
+        NSArray* rgb = [[self.contentData objectForKey:[Settings text:TextForApiKeyCellColor]] componentsSeparatedByString:@","];
+        self.titleLabel.text = [self.contentData  objectForKey:[Settings text:TextForApiKeyTitle]];
+        self.titleLabel.backgroundColor = [UIColor colorWithRed: [[rgb objectAtIndex:0] floatValue]/255.0 green:[[rgb objectAtIndex:1] floatValue]/255.0 blue:[[rgb objectAtIndex:2] floatValue]/255.0  alpha:1];
         [self.contentView addSubview:_titleLabel];
         
        
@@ -51,8 +54,7 @@
     UIImage* img = (UIImage*)[_contentData objectForKey:[Settings text:TextForApiKeyImage]];
     [_bgView setFrame:CGRectMake(5.f, frame.size.height - img.size.height, frame.size.width - 10.f, img.size.height)];
     
-    
-    
+    [_titleLabel setFrame:CGRectMake(5.f, frame.size.height - img.size.height, frame.size.width - 10.f, img.size.height)];
     img = (UIImage*)[Settings image:ImageForCatStateNormal];
     [_oclockView setFrame:CGRectMake(frame.size.width - img.size.width - 10.f, _bgView.frame.origin.y + 5.f, img.size.width, img.size.height)];
 }
