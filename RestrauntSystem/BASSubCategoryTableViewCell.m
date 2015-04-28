@@ -121,6 +121,7 @@
                                       andTextColor:[Settings color:ColorForDishCellWeight]];
     }
     self.lblWeight.text = _weight;
+    self.lblWeight.textAlignment = NSTextAlignmentLeft;
     //self.lblWeight.text = [NSString stringWithFormat:[Settings text:TextForDishCellWeightFormat], weight, [Settings text:TextForWeightUnit]];
 }
 

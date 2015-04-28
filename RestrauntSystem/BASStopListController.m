@@ -11,7 +11,7 @@
 
 @interface BASStopListController ()
 
-@property (nonatomic,strong) NSArray* contentData;
+@property (nonatomic,strong) NSDictionary* contentData;
 @property (nonatomic,strong) UITableView* tableView;
 
 @end
@@ -69,13 +69,13 @@
     BASManager* manager = [BASManager sharedInstance];
     
     [manager getData:[manager formatRequest:@"GETSTOPLIST" withParam:nil] success:^(id responseObject) {
-        
+    
         if([responseObject isKindOfClass:[NSDictionary class]]){
             
             NSArray* param = (NSArray*)[responseObject objectForKey:@"param"];
             NSLog(@"Response: %@",param);
             if(param != nil){
-                self.contentData = [NSArray arrayWithArray:param];
+                self.contentData = [[NSArray arrayWithArray:param] objectAtIndex:0];
                 [_tableView reloadData];
             }
  
@@ -90,9 +90,13 @@
 #pragma mark Table view methods
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    NSDictionary* dict = (NSDictionary*)[_contentData objectAtIndex:section];
     
-    return (NSString*)[dict objectForKey:@"name_category"];
+    
+    if ([_contentData objectForKey:@"critical_count"] !=nil) {
+        return @"Критический остаток";
+    } else {
+        return @"Недоступные блюда";
+    }
     
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -100,8 +104,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSDictionary* dict = (NSDictionary*)[_contentData objectAtIndex:section];
-    NSArray* dishes = (NSArray*)[dict objectForKey:@"dishes"];
+    NSArray* dishes = [[_contentData allKeys] objectAtIndex:section];
     return [dishes count];
 }
 
@@ -112,9 +115,9 @@
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
-    NSDictionary* dict = (NSDictionary*)[_contentData objectAtIndex:[indexPath section]];
-    NSArray* dishes = (NSArray*)[dict objectForKey:@"dishes"];
-    NSDictionary* dishe = (NSDictionary*)[dishes objectAtIndex:[indexPath row]];
+    //NSDictionary* dict = (NSDictionary*)[_contentData objectAtIndex:[indexPath section]];
+    //NSArray* dishes = (NSArray*)[dict objectForKey:@"dishes"];
+    NSDictionary* dishe = (NSDictionary*)[[_contentData allKeys] objectAtIndex:[indexPath row]];
     [cell.textLabel setText:(NSString*)[dishe objectForKey:@"name_dish"]];
     [cell.detailTextLabel setText:[NSString stringWithFormat:@"%@ - %@",(NSString*)[dishe objectForKey:@"weight"],(NSString*)[dishe objectForKey:@"price"]]];
     [cell.contentView setBackgroundColor:[UIColor lightGrayColor]];

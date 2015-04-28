@@ -81,7 +81,7 @@
 
 - (BOOL)isPreOrderTable {
     for (NSDictionary* dict in self.preOrderObjects) {
-        if([[dict objectForKey:@"id_table"]integerValue] == self.id_table && [[dict objectForKey:@"id_order"]integerValue] == -1 ){
+        if([[dict objectForKey:@"id_table"]integerValue] == self.id_table && [[dict objectForKey:@"id_order"]integerValue] <= 0 ){
             return YES;
         }
     }
@@ -90,7 +90,7 @@
 
 - (NSArray*) loadPreOrderObjects{
     for (NSDictionary* dict in self.preOrderObjects) {
-        if([[dict objectForKey:@"id_table"]integerValue] == self.id_table &&( [[dict objectForKey:@"id_order"]integerValue] == self.id_order ||self.id_order == -1  || self.id_order == 0)){
+        if([[dict objectForKey:@"id_table"]integerValue] == self.id_table &&( [[dict objectForKey:@"id_order"]integerValue] == self.id_order ||self.id_order <= 0 )){
             return [dict objectForKey:@"order_items"];
         }
     }
@@ -98,7 +98,8 @@
 }
 
 - (void) deletePreOrderObjects{
-    for (NSDictionary* dict in self.preOrderObjects) {
+    NSMutableArray* orders = [self.preOrderObjects mutableCopy];
+    for (NSDictionary* dict in orders) {
         if([[dict objectForKey:@"id_table"]integerValue] == self.id_table){
             [self.preOrderObjects removeObject:dict];
         }
