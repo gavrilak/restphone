@@ -11,7 +11,8 @@
 
 @interface BASStopListController ()
 
-@property (nonatomic,strong) NSDictionary* contentData;
+@property (nonatomic,strong) NSArray* notAvaibleData;
+@property (nonatomic,strong) NSArray* criticalCountData;
 @property (nonatomic,strong) UITableView* tableView;
 
 @end
@@ -75,7 +76,8 @@
             NSArray* param = (NSArray*)[responseObject objectForKey:@"param"];
             NSLog(@"Response: %@",param);
             if(param != nil){
-                self.contentData = [[NSArray arrayWithArray:param] objectAtIndex:0];
+                self.notAvaibleData = [ NSArray arrayWithArray:[[param objectAtIndex:0] objectForKey:@"not_available"]];
+                self.criticalCountData = [ NSArray arrayWithArray:[[param objectAtIndex:0] objectForKey:@"critical_count"]];
                 [_tableView reloadData];
             }
  
@@ -90,22 +92,36 @@
 #pragma mark Table view methods
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    
-    
-    if ([_contentData objectForKey:@"critical_count"] !=nil) {
-        return @"Критический остаток";
-    } else {
-        return @"Недоступные блюда";
+    switch ( section) {
+        case 0:
+            return @"Критичечкий остаток";
+        case 1:
+            return @"Недоступные блюда";
     }
     
+    return nil;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [_contentData count];
+    NSInteger numberSections = 2;
+  /*  if ([_criticalCountData count] > 0 ) {
+        numberSections++;
+    }
+    if ([_notAvaibleData count] > 0 ) {
+        numberSections++;
+    }*/
+    return numberSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray* dishes = [[_contentData allKeys] objectAtIndex:section];
-    return [dishes count];
+    
+    switch ( section) {
+        case 0:
+            return [_criticalCountData  count];
+        case 1:
+            return [_notAvaibleData  count];
+    }
+    
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -115,11 +131,17 @@
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
-    //NSDictionary* dict = (NSDictionary*)[_contentData objectAtIndex:[indexPath section]];
-    //NSArray* dishes = (NSArray*)[dict objectForKey:@"dishes"];
-    NSDictionary* dishe = (NSDictionary*)[[_contentData allKeys] objectAtIndex:[indexPath row]];
+    NSArray* dishes ;
+    switch (indexPath.section) {
+        case 0:
+            dishes = _criticalCountData;
+        case 1:
+            dishes = _notAvaibleData;
+    }
+
+    NSDictionary* dishe = (NSDictionary*)[dishes objectAtIndex:[indexPath row]];
     [cell.textLabel setText:(NSString*)[dishe objectForKey:@"name_dish"]];
-    [cell.detailTextLabel setText:[NSString stringWithFormat:@"%@ - %@",(NSString*)[dishe objectForKey:@"weight"],(NSString*)[dishe objectForKey:@"price"]]];
+    [cell.detailTextLabel setText:[NSString stringWithFormat:@"%@ %@ - %@ %@",[dishe objectForKey:@"weight"], [dishe objectForKey:@"unit_weight"],[dishe objectForKey:@"price"] , [dishe objectForKey:@"unit_price"] ]];
     [cell.contentView setBackgroundColor:[UIColor lightGrayColor]];
     
     return cell;
