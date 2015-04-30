@@ -1112,47 +1112,56 @@
 
 #pragma mark - Menu
 
-+ (UIImage *)menuCatImgForId:(NSString*)catName
++ (UIImage *)menuCatImgForId:(NSInteger )catID
 {
     NSString *imgName = EmptyString;
     
-    if([catName isEqualToString:DESSERTS])
-        imgName = @"cell_sweet";
-    else if([catName isEqualToString:SALADS])
-        imgName = @"cell_salats";
-    else if([catName isEqualToString:SOUPS])
-        imgName = @"cell_sup";
-    else if([catName isEqualToString:ALCOHOL])
-        imgName = @"cell_alco";
-    else if([catName isEqualToString:DRINKS])
-        imgName = @"cell_cofe";
-    else if([catName isEqualToString:BREAKFASTS])
-        imgName = @"cell_breakfast";
-    else
-        return nil;
-
+    switch (catID){
+        case 0 :
+            imgName = @"cell_breakfast";
+            break;
+        case 1 :
+            imgName = @"cell_zakuski";
+            break;
+        case 2 :
+            imgName = @"cell_salats";
+            break;
+        case 3 :
+            imgName = @"cell_sup";
+            break;
+        case 4 :
+            imgName = @"cell_blyuda";
+            break;
+        case 5 :
+            imgName = @"cell_pasta";
+            break;
+        case 6 :
+            imgName = @"cell_grill";
+            break;
+        case 7 :
+            imgName = @"cell_garniru";
+            break;
+        case 8 :
+            imgName = @"cell_bread";
+            break;
+        case 9 :
+            imgName = @"cell_sweet";
+            break;
+        case 10 :
+            imgName = @"cell_cofe";
+            break;
+        case 11 :
+            imgName = @"cell_kids";
+            break;
+        case 12 :
+            imgName = @"cell_alco";
+            break;
+        default:
+            imgName = @"cell_alco";
+            break;
+        
+    }
     return [UIImage imageNamed:imgName];
-}
-+ (NSString *)menuCatTitleForId:(NSString*)catName
-{
-    NSString *imgName = EmptyString;
-    
-    if([catName isEqualToString:DESSERTS])
-        imgName = @"Десерты";
-    else if([catName isEqualToString:SALADS])
-        imgName = @"Салаты";
-    else if([catName isEqualToString:SOUPS])
-        imgName = @"Супы";
-    else if([catName isEqualToString:ALCOHOL])
-        imgName = @"Алкоголь";
-    else if([catName isEqualToString:DRINKS])
-        imgName = @"Напитки";
-    else if([catName isEqualToString:BREAKFASTS])
-        imgName = @"Завтраки";
-    else
-        return nil;
-    
-    return imgName;
 }
 
 + (NSArray *)menuCategories

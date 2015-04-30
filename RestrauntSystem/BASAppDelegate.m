@@ -282,8 +282,13 @@
 {
     
     
-    [[UINavigationBar appearance] setBackgroundImage:[Settings image:ImageForNavBarBg] forBarMetrics:UIBarMetricsDefault];
-    
+   // [[UINavigationBar appearance] setBackgroundImage:[Settings image:ImageForNavBarBg] forBarMetrics:UIBarMetricsDefault];
+    //[[UINavigationBar appearance ] setTranslucent:NO];
+   //[[UINavigationBar appearance] setShadowImage:[UIImage new]];
+  [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:121/255.0 green:121/255.0 blue:121/255.0 alpha:0]];
+   // [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackOpaque];
+  //  [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [Settings color:ColorForNavBarTitleShadow];
     shadow.shadowOffset = [Settings offset:OffsetForNavBarTitleShadow];

@@ -27,13 +27,15 @@
         
         [self setBackgroundColor:[UIColor clearColor]];
         
-       // self.bgView = [[UIImageView alloc]initWithImage:[_contentData objectForKey:[Settings text:TextForApiKeyImage]]];
-       // [self.contentView addSubview:_bgView];
+        self.bgView = [[UIImageView alloc]initWithImage:[_contentData objectForKey:[Settings text:TextForApiKeyImage]]];
+        [self.contentView addSubview:_bgView];
 
         self.titleLabel = [[UILabel alloc] init];
-        NSArray* rgb = [[self.contentData objectForKey:[Settings text:TextForApiKeyCellColor]] componentsSeparatedByString:@","];
         self.titleLabel.text = [self.contentData  objectForKey:[Settings text:TextForApiKeyTitle]];
-        self.titleLabel.backgroundColor = [UIColor colorWithRed: [[rgb objectAtIndex:0] floatValue]/255.0 green:[[rgb objectAtIndex:1] floatValue]/255.0 blue:[[rgb objectAtIndex:2] floatValue]/255.0  alpha:1];
+        // NSArray* rgb = [[self.contentData objectForKey:[Settings text:TextForApiKeyCellColor]] componentsSeparatedByString:@","];
+       // self.titleLabel.backgroundColor = [UIColor colorWithRed: [[rgb objectAtIndex:0] floatValue]/255.0 green:[[rgb objectAtIndex:1] floatValue]/255.0 blue:[[rgb objectAtIndex:2] floatValue]/255.0  alpha:1];
+        self.titleLabel.textAlignment = NSTextAlignmentCenter;
+        self.titleLabel.textColor = [UIColor whiteColor];
         [self.contentView addSubview:_titleLabel];
         
        

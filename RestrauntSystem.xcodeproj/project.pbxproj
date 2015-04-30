@@ -202,6 +202,8 @@
 		A5FCA5C5193E00FF00C2DE49 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FCA5C4193E00FF00C2DE49 /* libxml2.2.dylib */; };
 		A5FCA5C9193E01D000C2DE49 /* BASManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FCA5C8193E01D000C2DE49 /* BASManager.m */; };
 		A5FCA5CC193E020A00C2DE49 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FCA5CB193E020A00C2DE49 /* Settings.m */; };
+		BFD81E271AF2260500E87A1E /* cell_kids@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFD81E261AF2260500E87A1E /* cell_kids@2x.png */; };
+		BFD81E291AF2262B00E87A1E /* cell_garniru@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFD81E281AF2262A00E87A1E /* cell_garniru@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -493,6 +495,8 @@
 		A5FCA5C8193E01D000C2DE49 /* BASManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BASManager.m; sourceTree = "<group>"; };
 		A5FCA5CA193E020A00C2DE49 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		A5FCA5CB193E020A00C2DE49 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		BFD81E261AF2260500E87A1E /* cell_kids@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_kids@2x.png"; sourceTree = "<group>"; };
+		BFD81E281AF2262A00E87A1E /* cell_garniru@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_garniru@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -668,6 +672,8 @@
 		A5178899193F546900A241EE /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				BFD81E281AF2262A00E87A1E /* cell_garniru@2x.png */,
+				BFD81E261AF2260500E87A1E /* cell_kids@2x.png */,
 				A517889A193F546900A241EE /* cell_alco@2x.png */,
 				A517889B193F546900A241EE /* cell_blyuda@2x.png */,
 				A517889C193F546900A241EE /* cell_bread@2x.png */,
@@ -1298,6 +1304,7 @@
 				A51788E7193F546900A241EE /* halls_btn_move@2x~ipad.png in Resources */,
 				A517891C193F546900A241EE /* btn_discount@2x.png in Resources */,
 				A51788D9193F546900A241EE /* auth_bg@2x.png in Resources */,
+				BFD81E291AF2262B00E87A1E /* cell_garniru@2x.png in Resources */,
 				A51788EF193F546900A241EE /* cell_breakfast@2x.png in Resources */,
 				A5A0B03E1941A51400A49BF8 /* 5min_blank.mp3 in Resources */,
 				A59ED8A11954641500E065AC /* buttton_ozhudaniye@2x.png in Resources */,
@@ -1320,6 +1327,7 @@
 				A5178915193F546900A241EE /* button_add@2x.png in Resources */,
 				A5178909193F546900A241EE /* button_photo_m.png in Resources */,
 				A5F733F4193DFA4F0003FC91 /* Images.xcassets in Resources */,
+				BFD81E271AF2260500E87A1E /* cell_kids@2x.png in Resources */,
 				A517891E193F546900A241EE /* btn_tick_s@2x.png in Resources */,
 				A54D849A196EB87D005CBD8A /* field@2x.png in Resources */,
 				A59F1340198663EF0058B815 /* unread_s@2x.png in Resources */,

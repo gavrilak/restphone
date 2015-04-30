@@ -143,8 +143,8 @@
                                            [Settings text:TextForApiKeyId]: (NSNumber*)[obj objectForKey:@"id_category"],
                                            [Settings text:TextForApiKeyTableState]: (NSNumber*)[obj objectForKey:@"load"],
                                            [Settings text:TextForApiKeyCellColor]: (NSString*)[obj objectForKey:@"color"],
-                                           [Settings text:TextForApiKeyImage]: [Settings menuCatImgForId:catName],
-                                           [Settings text:TextForApiKeyTitle]: [Settings menuCatTitleForId:catName],
+                                           [Settings text:TextForApiKeyImage]: [Settings menuCatImgForId:[[obj objectForKey:@"id_category"] integerValue]],
+                                           [Settings text:TextForApiKeyTitle]: catName,
                                            @"modificators":(NSArray*)[obj objectForKey:@"modificators"],
                                            };
                     

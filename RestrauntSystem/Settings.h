@@ -31,14 +31,6 @@
 #define HALLS3 @"Второй этаж"
 
 
-#define BREAKFASTS @"Завтраки"
-#define DESSERTS @"Закуски"
-#define SALADS @"Салаты"
-#define SOUPS @"Супы"
-#define ALCOHOL @"Алкоголь"
-#define DRINKS @"Напитки"
-
-
 #pragma mark - Enums
 
 
@@ -917,8 +909,7 @@ typedef NS_ENUM(NSUInteger, OrderItemState) {
     OrderItemStateReserved = 7,
 };
 
-+ (NSString *)menuCatTitleForId:(NSString*)catName;
-+ (UIImage *)menuCatImgForId:(NSString*)catId;
++ (UIImage *)menuCatImgForId:(NSInteger)catId;
 + (NSArray *)menuCategories;
 
 

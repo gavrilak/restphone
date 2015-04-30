@@ -23,6 +23,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.navigationBar.translucent = NO;
     [self.view setBackgroundColor:[UIColor clearColor]];
     [self setupBgImg];
 }
