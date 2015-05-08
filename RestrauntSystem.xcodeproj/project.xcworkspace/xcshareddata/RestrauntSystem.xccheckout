@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>B6931526-93EA-4C1D-B014-11D547F5B745</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>RestrauntSystem</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>58379BA2D0A3F5244AAD9E7C9AA97474A91D0717</key>
 		<string>https://github.com/gavrilak/restphone.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>RestrauntSystem.xcodeproj/project.xcworkspace</string>
+	<string>RestrauntSystem.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>58379BA2D0A3F5244AAD9E7C9AA97474A91D0717</key>

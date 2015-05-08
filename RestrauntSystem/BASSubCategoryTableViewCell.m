@@ -21,7 +21,8 @@
 @property(nonatomic, strong) UIButton       *btnPlus;
 @property(nonatomic, strong) UIButton       *btnMinus;
 @property(nonatomic, strong) UIButton       *btnPrepare;
-@property(nonatomic, strong) UIButton       *btnModificat;
+@property(nonatomic, strong) UIButton       *btnModificatLocal;
+@property(nonatomic, strong) UIButton       *btnModificatGlobal;
 
 @property(nonatomic, strong) UIImageView    *imgViewBg;
 @property(nonatomic, strong) UIImageView    *imgViewMods;
@@ -51,12 +52,21 @@
             
             
             
-            self.btnModificat = [UIButton buttonWithType:UIButtonTypeCustom];
-            [_btnModificat setBackgroundColor:[UIColor clearColor]];
-            [_btnModificat setBackgroundImage:[UIImage imageNamed:@"modification.png"] forState:UIControlStateNormal];
-            [_btnModificat addTarget:self action:@selector(modificatClicked) forControlEvents:UIControlEventTouchUpInside];
-            [_btnModificat setFrame:CGRectMake(12.f, 40.f, 33.f, 28.5f)];
-            [self addSubview:_btnModificat];
+            self.btnModificatLocal = [UIButton buttonWithType:UIButtonTypeCustom];
+            self.btnModificatLocal.tag = 1;
+            [self.btnModificatLocal setBackgroundColor:[UIColor clearColor]];
+            [_btnModificatLocal setBackgroundImage:[UIImage imageNamed:@"modification.png"] forState:UIControlStateNormal];
+            [_btnModificatLocal addTarget:self action:@selector(modificatClicked:) forControlEvents:UIControlEventTouchUpInside];
+            [_btnModificatLocal setFrame:CGRectMake(12.f, 25.f, 33.f, 28.5f)];
+            [self addSubview:_btnModificatLocal];
+            
+            self.btnModificatGlobal = [UIButton buttonWithType:UIButtonTypeCustom];
+            self.btnModificatGlobal.tag = 2;
+            [self.btnModificatGlobal setBackgroundColor:[UIColor clearColor]];
+            [_btnModificatGlobal setBackgroundImage:[UIImage imageNamed:@"modification.png"] forState:UIControlStateNormal];
+            [_btnModificatGlobal addTarget:self action:@selector(modificatClicked:) forControlEvents:UIControlEventTouchUpInside];
+            [_btnModificatGlobal setFrame:CGRectMake(12.f, 65.f, 33.f, 28.5f)];
+            [self addSubview:_btnModificatGlobal];
         }
         
 
@@ -169,9 +179,8 @@
     _modsExist = modsExist;
     
     //self.imgViewMods.hidden = !modsExist;
-    [_btnModificat setHidden:modsExist];
-    
-}
+    [_btnModificatLocal setHidden:modsExist];
+    [_btnModificatGlobal setHidden:modsExist];}
 
 - (void)setState:(OrderItemState)dishState
 {
@@ -242,10 +251,11 @@
 
 
 #pragma mark - Actions
-- (void)modificatClicked{
-    if ([self.delegate respondsToSelector:@selector(modificationDish:)]) {
+- (void)modificatClicked:(id) sender {
+    UIButton* button = (UIButton*) sender;
+    if ([self.delegate respondsToSelector:@selector(modificationDish:tag:)]) {
         
-        [self.delegate modificationDish:self.dishIdx];
+        [self.delegate modificationDish:self.dishIdx tag:button.tag];
     }
 }
 - (void)prepareClicked{

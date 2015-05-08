@@ -223,6 +223,8 @@
                 [_tableView reloadData];
                 
 
+            } else {
+                [manager showAlertViewWithMess:@"Ошибка предачи данных! Попробуйте отправить заказ позже!!!"];
             }
         }
     } failure:^(NSString *error) {
@@ -394,7 +396,7 @@
     
 }
 #pragma mark - BASModifyView  methods
-- (void)modificationDish:(NSUInteger)_dishIdx{
+- (void)modificationDish:(NSUInteger)_dishIdx tag:(NSUInteger)tag{
   
     TheApp;
     if(app.addOrderList != nil && app.addOrderList.count > 0){
@@ -405,13 +407,19 @@
         NSNumber* count_dish = (NSNumber*)[dict objectForKey:@"count_dish"];
         if([count_dish integerValue] > 0){
             UIImage* image = [UIImage imageNamed:@"cell_modifiers_x3.png"];
-            NSArray* mod = (NSArray*)[dict objectForKey:@"mod"];
+            NSArray* mod;
+            if (tag == 1) {
+                mod = (NSArray*)[dict objectForKey:@"local_mod"];
+            } else {
+                mod = (NSArray*)[dict objectForKey:@"global_mod"];
+            }
             if(mod != nil && mod.count > 0){
                 [_btAdd setEnabled:NO];
                 [_btCalc setEnabled:NO];
                 [_btOrder setEnabled:NO];
                 self.modifyView = [[BASModifyView alloc]initWithFrame:CGRectMake(self.view.frame.size.width / 2 - image.size.width / 2, self.view.frame.size.height / 2 - image.size.height / 2 - 60.f, image.size.width, image.size.height) withContent:mod withDelegate:(id)self];
                 _modifyView.title = (NSString*)[dict objectForKey:@"name_dish"];
+                _modifyView.tag = tag;
                 [self.view addSubview:_modifyView];
                 app.isModify = YES;
                 [_tableView setScrollEnabled:NO];
@@ -435,7 +443,11 @@
         NSDictionary* dict = (NSDictionary*)[app.addOrderList objectAtIndex:dishIdx];
         NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
         [newDict addEntriesFromDictionary:dict];
-        [newDict setObject:content forKey:@"mod"];
+        if(view.tag == 1) {
+            [newDict setObject:content forKey:@"local_mod"];
+        } else {
+            [newDict setObject:content forKey:@"global_mod"];
+        }
         [temp replaceObjectAtIndex:dishIdx withObject:newDict];
         
         app.addOrderList = [NSArray arrayWithArray:temp];

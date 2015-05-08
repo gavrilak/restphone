@@ -41,6 +41,6 @@ typedef void (^SuccessBlock)();
 @required
 - (void)plusOneDish:(NSUInteger)dishIdx success:(SuccessBlock)success;
 - (void)minusOneDish:(NSUInteger)dishIdx success:(SuccessBlock)success;
-- (void)modificationDish:(NSUInteger)dishIdx;
+- (void)modificationDish:(NSUInteger)dishIdx tag:(NSUInteger) tag;
 
 @end

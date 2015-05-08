@@ -153,7 +153,8 @@
                                     @"unit_time": (NSString*) [obj objectForKey:@"unit_time"],
                                     @"availability": (NSNumber*)[obj objectForKey:@"availability"],
                                     @"max_dish": (NSNumber*)[obj objectForKey:@"max_dish"],
-                                    @"mod": (NSArray*)[obj objectForKey:@"mod"],
+                                    @"global_mod": (NSArray*)[obj objectForKey:@"global_modificators"],
+                                    @"local_mod": (NSArray*)[obj objectForKey:@"local_modificators"],
                                 };
                         } else {
                             dict = @{
@@ -169,7 +170,9 @@
                                      @"unit_time": (NSString*) [obj objectForKey:@"unit_time"],
                                      @"availability": (NSNumber*)[obj objectForKey:@"availability"],
                                      @"count_dish": (NSNumber*)[obj objectForKey:@"count_dish"],
-                                     @"mod": (NSArray*)[obj objectForKey:@"mod"],
+                                     @"global_mod": (NSArray*)[obj objectForKey:@"global_modificators"],
+                                     @"local_mod": (NSArray*)[obj objectForKey:@"local_modificators"],
+
                                      };
                         }
        
@@ -268,7 +271,8 @@
                                       (NSString*)[obj objectForKey:@"unit_price"],@"unit_price",
                                       (NSString*)[obj objectForKey:@"weight"],@"weight",
                                       (NSString*)[obj objectForKey:@"unit_weight"],@"unit_weight",
-                                      (NSArray*)[_contentData objectForKey:@"modificators"],@"mod",
+                                      (NSArray*) [obj objectForKey:@"local_mod"],@"local_mod",
+                                      (NSArray*) [obj objectForKey:@"global_mod"],@"global_mod",
                                       nil];
 
                 [_orders replaceObjectAtIndex:_dishIdx withObject:dish];
@@ -315,7 +319,7 @@
     }
 }
 #pragma mark - BASModifyView  methods
-- (void)modificationDish:(NSUInteger)_dishIdx{
+- (void)modificationDish:(NSUInteger)_dishIdx tag:(NSUInteger)tag{
     TheApp;
     dishIdx = _dishIdx;
 
@@ -324,14 +328,18 @@
         if(![[_orders objectAtIndex:dishIdx] isKindOfClass:[NSNull class]]){
             NSDictionary* dict = (NSDictionary*)[_orders objectAtIndex:dishIdx];
             NSNumber* count_dish = (NSNumber*)[dict objectForKey:@"count_dish"];
+            NSArray* mod;
+            if (tag == 1) {
+                mod = (NSArray*)[dict objectForKey:@"local_mod"];
+            } else {
+                mod = (NSArray*)[dict objectForKey:@"global_mod"];
+            }
             if([count_dish integerValue] > 0){
                 UIImage* image = [UIImage imageNamed:@"cell_modifiers_x3.png"];
-                dict = (NSDictionary*)[_dishesContent objectAtIndex:dishIdx];
-                NSArray* mod = (NSArray*)[dict objectForKey:@"mod"];
                 if(mod != nil && mod.count > 0 && !app.isModify){
                     self.modifyView = [[BASModifyView alloc]initWithFrame:CGRectMake(self.view.frame.size.width / 2 - image.size.width / 2, self.view.frame.size.height / 2 - image.size.height / 2 - 60.f, image.size.width, image.size.height) withContent:mod withDelegate:(id)self];
                     _modifyView.title = (NSString*)[dict objectForKey:@"name_dish"];
-                   
+                    _modifyView.tag = tag;
                     [self.view addSubview:_modifyView];
                     app.isModify = YES;
                     [_tableView setScrollEnabled:NO];
@@ -351,7 +359,11 @@
         NSDictionary* dict = (NSDictionary*)[_orders objectAtIndex:dishIdx];
         NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
         [newDict addEntriesFromDictionary:dict];
-        [newDict setObject:content forKey:@"mod"];
+        if(view.tag == 1) {
+            [newDict setObject:content forKey:@"local_mod"];
+        } else {
+            [newDict setObject:content forKey:@"global_mod"];
+        }
         [_orders replaceObjectAtIndex:dishIdx withObject:newDict];
 
     }

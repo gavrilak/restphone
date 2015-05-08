@@ -135,8 +135,10 @@
     switch (indexPath.section) {
         case 0:
             dishes = _criticalCountData;
+            break;
         case 1:
             dishes = _notAvaibleData;
+            break;
     }
 
     NSDictionary* dishe = (NSDictionary*)[dishes objectAtIndex:[indexPath row]];
