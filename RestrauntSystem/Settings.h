@@ -50,7 +50,8 @@ typedef enum {
     CATEGORYTABLE,
     SUBCATEGORYTABLE,
     NOTICETABLE,
-    ORDERSLIST
+    ORDERSLIST,
+    VIRTUALCATEGORYTABLE
 } TableType;
 
 typedef enum {

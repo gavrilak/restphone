@@ -212,11 +212,11 @@
             BASVirtualListController* controller = [BASVirtualListController new];
             
             NSArray* contentData = (NSArray*)[dict objectForKey:@"virtualTableElements"];
-            dict = @{@"order_items":contentData};
-            dict = @{@"order":dict};
+           // dict = @{@"order_items":contentData};
+           // dict = @{@"order":dict};
             TheApp;
             app.isOrder = NO;
-            controller.contentData = dict;
+            controller.contentData = contentData;
 
             [self.navigationController pushViewController:controller animated:YES];
                 

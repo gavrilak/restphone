@@ -83,6 +83,7 @@
         case CATEGORYTABLE:
             return 70.f;
             break;
+        case VIRTUALCATEGORYTABLE:
         case SUBCATEGORYTABLE:
              return 126.f;
             break;
@@ -114,6 +115,8 @@
             Cell = cell;
         }
             break;
+        case VIRTUALCATEGORYTABLE:
+            obj = [obj objectForKey:@"dish"];
         case SUBCATEGORYTABLE:{
             ///BASSubCategoryTableViewCell* cell = (BASSubCategoryTableViewCell*)[self dequeueReusableCellWithIdentifier:CellIdentifier];
            // if (cell == nil) {

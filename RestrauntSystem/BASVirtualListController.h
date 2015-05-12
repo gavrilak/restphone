@@ -10,6 +10,6 @@
 
 @interface BASVirtualListController : RCSBaseViewController
 
-@property(nonatomic,strong)NSDictionary* contentData;
+@property(nonatomic,strong)NSArray* contentData;
 
 @end

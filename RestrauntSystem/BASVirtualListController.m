@@ -41,14 +41,14 @@
         self.tableView = nil;
         CGRect frame = [[UIScreen mainScreen]bounds];
         
-        NSDictionary* order = (NSDictionary*)[_contentData objectForKey:@"order"];
+       /// NSDictionary* order = (NSDictionary*)[_contentData objectForKey:@"order"];
         
-        self.dishesContent = nil;
-        self.dishesContent = [NSArray arrayWithArray:(NSArray*)[order objectForKey:@"order_items"]];
+      //  self.dishesContent = nil;
+      //  self.dishesContent = [NSArray arrayWithArray:(NSArray*)[order objectForKey:@"order_items"]];
        
 
 
-        self.tableView = [[BASCustomTableView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) style:UITableViewStylePlain withContent:_dishesContent withType:SUBCATEGORYTABLE withDelegate:nil];
+        self.tableView = [[BASCustomTableView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) style:UITableViewStylePlain withContent:_contentData withType:VIRTUALCATEGORYTABLE withDelegate:nil];
         
         _tableView.delegate = (id)self;
         
