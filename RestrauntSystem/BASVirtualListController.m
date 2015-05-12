@@ -45,7 +45,8 @@
         
         self.dishesContent = nil;
         self.dishesContent = [NSArray arrayWithArray:(NSArray*)[order objectForKey:@"order_items"]];
-        
+       
+
 
         self.tableView = [[BASCustomTableView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) style:UITableViewStylePlain withContent:_dishesContent withType:SUBCATEGORYTABLE withDelegate:nil];
         

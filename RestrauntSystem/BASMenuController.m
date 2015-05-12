@@ -96,8 +96,7 @@
                                            [Settings text:TextForApiKeyTableState]: (NSNumber*)[obj objectForKey:@"load"],
                                            [Settings text:TextForApiKeyCellColor]: (NSString*)[obj objectForKey:@"color"],
                                            [Settings text:TextForApiKeyImage]: [self.rootMenuDict objectForKey:[Settings text:TextForApiKeyImage]],
-                                           [Settings text:TextForApiKeyTitle]: catName ,
-                                           @"modificators":(NSArray*)[obj objectForKey:@"modificators"],
+                                           [Settings text:TextForApiKeyTitle]: catName
                                            };
                    
                     [data addObject:dict];
@@ -144,8 +143,7 @@
                                            [Settings text:TextForApiKeyTableState]: (NSNumber*)[obj objectForKey:@"load"],
                                            [Settings text:TextForApiKeyCellColor]: (NSString*)[obj objectForKey:@"color"],
                                            [Settings text:TextForApiKeyImage]: [Settings menuCatImgForId:[[obj objectForKey:@"id_category"] integerValue]],
-                                           [Settings text:TextForApiKeyTitle]: catName,
-                                           @"modificators":(NSArray*)[obj objectForKey:@"modificators"],
+                                           [Settings text:TextForApiKeyTitle]: catName
                                            };
                     
                     [data addObject:dict];

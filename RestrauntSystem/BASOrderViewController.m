@@ -185,12 +185,31 @@
     BASManager* manager = [BASManager sharedInstance];
     NSNumber* id_employee = (NSNumber*)[app.employeeInfo objectForKey:@"id_employee"];
     
+    NSArray* sendOrders = [NSArray arrayWithArray:app.orders];
+    
+    for (NSMutableDictionary* order in sendOrders) {
+        NSMutableArray* modificators = [[NSMutableArray alloc] init];
+        NSArray* globalMod = [order objectForKey:@"global_mod"];
+        for (NSDictionary* item in globalMod) {
+            if ( [[item objectForKey:@"state"] integerValue ]== 1)
+                [modificators addObject:item];
+        }
+        NSArray* localMod = [order objectForKey:@"local_mod"];
+        for (NSDictionary* item in localMod) {
+            if ( [[item objectForKey:@"state"] integerValue ]== 1)
+                [modificators addObject:item];
+        }
+        [order removeObjectForKey:@"local_mod"];
+        [order removeObjectForKey:@"global_mod"];
+        [order setObject:modificators forKey:@"modificators"];
+        
+    }
     
     NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           id_employee,@"id_employee",
                           [NSNumber numberWithInteger:app.id_table],@"id_table",
                           [NSNumber numberWithInteger:app.id_order],@"id_order",
-                          app.orders,@"order_items",
+                          sendOrders,@"order_items",
                           nil];
     
     [manager getData:[manager formatRequest:@"MAKEORDER" withParam:dict] success:^(id responseObject) {
