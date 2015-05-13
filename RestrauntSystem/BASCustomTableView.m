@@ -174,9 +174,12 @@
                 type = ALLTYPE;
             
             BASOrdersHistoryTableViewCell *cell = [[BASOrdersHistoryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier withContent:dict withType:type];
-  
-                
-            NSNumber* cost = (NSNumber*)[dict objectForKey:@"cost"];
+            NSNumber* cost;
+            if(type != ALLTYPE ) {
+                cost = (NSNumber*)[dict objectForKey:@"cost"];
+            } else {
+                cost = (NSNumber*)[dict objectForKey:@"cost_discount"];
+            }
             [cell.textView setText:[NSString stringWithFormat:@"%d грн",[cost integerValue]]];
 
             NSNumber* number_table = (NSNumber*)[dict objectForKey:@"number_table"];
@@ -188,7 +191,9 @@
                 time = [NSString stringWithFormat:@"%@",[sort objectAtIndex:1]];
                 sort = [time componentsSeparatedByString:@":"];
                 cell.timeView.text = [NSString stringWithFormat:@"%@:%@",[sort objectAtIndex:0],[sort objectAtIndex:1]];
-            }
+                cell.priceView.text = [NSString stringWithFormat:@"%@%%",[[dict objectForKey:@"client"] objectForKey:@"discount"]];
+                cell.discountView.text = [NSString stringWithFormat:@"%.2f грн",[[dict objectForKey:@"discount"] floatValue]];
+             }
             
             
             cell.status = [status integerValue];

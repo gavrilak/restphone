@@ -188,6 +188,7 @@
     NSArray* sendOrders = [NSArray arrayWithArray:app.orders];
     
     for (NSMutableDictionary* order in sendOrders) {
+       
         NSMutableArray* modificators = [[NSMutableArray alloc] init];
         NSArray* globalMod = [order objectForKey:@"global_mod"];
         for (NSDictionary* item in globalMod) {
@@ -202,6 +203,7 @@
         [order removeObjectForKey:@"local_mod"];
         [order removeObjectForKey:@"global_mod"];
         [order setObject:modificators forKey:@"modificators"];
+      
         
     }
     

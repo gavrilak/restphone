@@ -263,7 +263,7 @@
                 [_orders replaceObjectAtIndex:index withObject:newDict];
               
             } else {
-                NSDictionary* dish = [NSDictionary dictionaryWithObjectsAndKeys:
+                NSMutableDictionary* dish = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                       id_dish,@"id_dish",
                                       [NSNumber numberWithInt:1],@"count_dish",
                                       (NSString*)[obj objectForKey:@"name_dish"],@"name_dish",
