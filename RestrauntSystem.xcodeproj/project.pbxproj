@@ -202,6 +202,7 @@
 		A5FCA5C5193E00FF00C2DE49 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FCA5C4193E00FF00C2DE49 /* libxml2.2.dylib */; };
 		A5FCA5C9193E01D000C2DE49 /* BASManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FCA5C8193E01D000C2DE49 /* BASManager.m */; };
 		A5FCA5CC193E020A00C2DE49 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FCA5CB193E020A00C2DE49 /* Settings.m */; };
+		BF4F07BE1BF22AAA00897017 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF4F07BD1BF22AAA00897017 /* LaunchScreen.xib */; };
 		BFD81E271AF2260500E87A1E /* cell_kids@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFD81E261AF2260500E87A1E /* cell_kids@2x.png */; };
 		BFD81E291AF2262B00E87A1E /* cell_garniru@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFD81E281AF2262A00E87A1E /* cell_garniru@2x.png */; };
 /* End PBXBuildFile section */
@@ -495,6 +496,7 @@
 		A5FCA5C8193E01D000C2DE49 /* BASManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BASManager.m; sourceTree = "<group>"; };
 		A5FCA5CA193E020A00C2DE49 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		A5FCA5CB193E020A00C2DE49 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		BF4F07BD1BF22AAA00897017 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		BFD81E261AF2260500E87A1E /* cell_kids@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_kids@2x.png"; sourceTree = "<group>"; };
 		BFD81E281AF2262A00E87A1E /* cell_garniru@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_garniru@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -991,6 +993,7 @@
 				A5F73465193DFF6A0003FC91 /* Service */,
 				A517885E193F2BF700A241EE /* Resource */,
 				A5F733DF193DFA4F0003FC91 /* Supporting Files */,
+				BF4F07BD1BF22AAA00897017 /* LaunchScreen.xib */,
 			);
 			path = RestrauntSystem;
 			sourceTree = "<group>";
@@ -1208,7 +1211,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = BAS;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = BestAppStudio;
 				TargetAttributes = {
 					A5F733D4193DFA4F0003FC91 = {
@@ -1259,6 +1262,7 @@
 				A54B343F19ACBF30003A1F5A /* cell_modifiers_new@2x.png in Resources */,
 				A51788FD193F546900A241EE /* btn_order@2x.png in Resources */,
 				A51788FF193F546900A241EE /* nav_bar_horiz_bg@2x~ipad.png in Resources */,
+				BF4F07BE1BF22AAA00897017 /* LaunchScreen.xib in Resources */,
 				A5178917193F546900A241EE /* button_zakaz@2x.png in Resources */,
 				A54D849F196EB8CC005CBD8A /* bg_inactive@2x.png in Resources */,
 				A51788EE193F546900A241EE /* cell_bread@2x.png in Resources */,
@@ -1500,6 +1504,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1514,7 +1519,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1547,7 +1552,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1569,7 +1574,8 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "RestrauntSystem/RestrauntSystem-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bestappstudio.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1592,7 +1598,8 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "RestrauntSystem/RestrauntSystem-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bestappstudio.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1616,6 +1623,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "RestrauntSystemTests/RestrauntSystemTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bestappstudio.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -1634,6 +1642,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RestrauntSystem/RestrauntSystem-Prefix.pch";
 				INFOPLIST_FILE = "RestrauntSystemTests/RestrauntSystemTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bestappstudio.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
